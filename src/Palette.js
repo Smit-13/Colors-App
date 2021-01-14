@@ -4,22 +4,19 @@ import Navbar from './NavBar';
 import PaletteFooter from './PaletteFooter';
 import './Palette.css';
 
-export class Palette extends Component {
-  state = {
-    level: 500,
-    format: 'hex',
-  };
-  changeLevel = this.changeLevel.bind(this);
-  changeFormat = this.changeFormat.bind(this);
-
-  changeFormat(val) {
-    this.setState({format: val});
+class Palette extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {level: 500, format: 'hex'};
+    this.changeLevel = this.changeLevel.bind(this);
+    this.changeFormat = this.changeFormat.bind(this);
   }
-
   changeLevel(level) {
     this.setState({level});
   }
-
+  changeFormat(val) {
+    this.setState({format: val});
+  }
   render() {
     const {colors, paletteName, emoji, id} = this.props.palette;
     const {level, format} = this.state;
@@ -29,7 +26,7 @@ export class Palette extends Component {
         name={color.name}
         key={color.id}
         moreUrl={`/palette/${id}/${color.id}`}
-        showLink
+        showingFullPalette
       />
     ));
     return (
@@ -39,13 +36,11 @@ export class Palette extends Component {
           changeLevel={this.changeLevel}
           handleChange={this.changeFormat}
           showingAllColors
-        ></Navbar>
-
+        />
         <div className='Palette-colors'>{colorBoxes}</div>
         <PaletteFooter paletteName={paletteName} emoji={emoji} />
       </div>
     );
   }
 }
-
 export default Palette;
