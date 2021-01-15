@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
+import styles from './styles/NavbarStyles';
 
 export class NavBar extends Component {
   state = {
@@ -28,19 +29,18 @@ export class NavBar extends Component {
   }
 
   render() {
-    const {level, changeLevel} = this.props;
+    const {level, changeLevel, showingAllColors, classes} = this.props;
     const {format} = this.state;
     return (
-      <nav className='Navbar'>
-        <div className='logo'>
+      <nav className={classes.Navbar}>
+        <div className={classes.logo}>
           <Link to='/'>ReactColorPicker</Link>
         </div>
 
-        {this.props.showingAllColors && (
-          <div className='slider-container'>
+        {showingAllColors && (
+          <div className={classes.slider}>
             <span>Level: {level}</span>
-
-            <div className='slider'>
+            <div>
               <Slider
                 defaultValue={level}
                 min={100}
@@ -51,7 +51,7 @@ export class NavBar extends Component {
             </div>
           </div>
         )}
-        <div className='select-container'>
+        <div className={classes.selectContainer}>
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem value='hex'>HEX - #ffffff</MenuItem>
             <MenuItem value='rgb'>RGB - rgba(255,255,255)</MenuItem>
@@ -88,4 +88,4 @@ export class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default withStyles(styles)(NavBar);

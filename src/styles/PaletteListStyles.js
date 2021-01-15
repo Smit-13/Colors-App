@@ -7,7 +7,7 @@ export default {
     justifyContent: 'center',
   },
   container: {
-    height: '100%',
+    height: '100vh',
     width: '65%',
     display: 'flex',
     alignItems: 'flex-start ',
